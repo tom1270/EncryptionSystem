@@ -13,6 +13,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
+import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
@@ -32,7 +33,7 @@ public class Main extends Application {
         Button gb = new Button();
         ComboBox msb = new ComboBox();
         TextField inb = new TextField();
-        Label outb = new Label();
+        TextArea outb = new TextArea();
        primaryStage.setTitle("Encrypter");
        primaryStage.setScene(new Scene(root, 640, 480));
        primaryStage.show();

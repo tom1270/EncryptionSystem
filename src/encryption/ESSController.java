@@ -49,7 +49,7 @@ public class ESSController implements Initializable {
     private ComboBox msb;
 
     @FXML
-    public Label outb;
+    public TextArea outb;
     
    
     public void message() throws IOException{
