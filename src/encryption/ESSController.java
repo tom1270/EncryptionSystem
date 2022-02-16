@@ -5,6 +5,7 @@
  */
 package encryption;
 
+import static encryption.Cipher.cipher;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
@@ -23,6 +24,8 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.text.TextFlow;
+import java.lang.String;
+import javafx.event.ActionEvent;
 
 /**
  *
@@ -30,6 +33,32 @@ import javafx.scene.text.TextFlow;
  */
 public class ESSController implements Initializable {
     
+    //caesar cipher code
+        public static char cipher(char ciph, int key) {
+
+        final int keyLength = 26;
+        final char shuffledASCII = Character.isUpperCase(ciph) ? 'A' : 'a';
+        final int cipherShift = key % keyLength;
+
+        char shifted = (char) (ciph - shuffledASCII);
+
+        shifted = (char) ((shifted + cipherShift + keyLength) % keyLength);
+
+        return (char) (shifted + shuffledASCII);
+    }
+
+    // Rotate a string k-positions
+    public static String cipher(String str, int key) {
+        StringBuilder sb = new StringBuilder();
+        for (int i = 0; i < str.length(); i++) {
+            sb.append(cipher(str.charAt(i), key));
+        }
+        return sb.toString();
+    }
+    
+    public String password;
+    public String pt;
+    public int key;
     private final Random random = new Random();
     private char character = ' ';
     private char[] letters;
@@ -57,18 +86,51 @@ public class ESSController implements Initializable {
        String os = msb.getSelectionModel().getSelectedItem().toString();
        
        if(em.equals("ASCII")){
-          if(os.equals("New Key")){
-              newKey(0);
+         if(os.equals("New Key")){
+           newKey(0);
         }else if(os.equals("Get Key")){
            getKey();
-       }else if(os.equals("Encrypt A Message")){
+        }else if(os.equals("Encrypt A Message")){
            encryptMessage();
-       }else if(os.equals("Decrypt A Message")){
+        }else if(os.equals("Decrypt A Message")){
            decryptMessage();
        } 
       }
+       //caesar cipher code
+       if(em.equals("Caesar Cipher") && os.equals("New Key")){
+           String keys = inb.getText();
+           key = Integer.parseInt(keys);
+           outb.setText("Enter the amount you would like to shift your sentence by (between 1 and 25)");
+       }else if(em.equals("Caesar Cipher") && os.equals("Get Key")){
+           if (key < 1 || key > 25) {
+                outb.setText("The key must be between 1 and 25, you entered " + key);
+            }else{
+           outb.setText(" " + key);
+           }
+       }else if(em.equals("Caesar Cipher") && os.equals("Encrypt A Message")){
+           if(key < 1 || key > 25);
         
-          
+        password = inb.getText();
+        outb.setText("Your Password:\t" + password);
+        
+        String encryption = cipher(password, key);
+        outb.appendText("\n**********************************************************************");
+        outb.appendText("\nEncrypted Password:\t" + encryption);
+        outb.appendText("\n**********************************************************************");
+        
+       }else if(em.equals("Caesar Cipher") && os.equals("Decrypt A Message")){
+           if(key < 1 || key > 25);
+        
+        pt = inb.getText();
+        outb.setText("Your Encrypted Password:\t" + pt);
+        
+        String encryption = cipher(pt, key);
+        outb.appendText("\n**********************************************************************");
+        outb.appendText("\nDecrypted Password:\t" + cipher(encryption, key));
+        outb.appendText("\n**********************************************************************"); 
+        System.out.print(cipher(encryption, key));
+       }
+       
     }
     
     

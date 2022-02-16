@@ -62,7 +62,7 @@
             </Label>
             <ComboBox fx:id="msb" layoutX="29.0" layoutY="14.0" prefHeight="52.0" prefWidth="214.0" promptText="Would  you like to..." />
             <Button fx:id="gb" defaultButton="true" layoutX="615.0" layoutY="14.0" mnemonicParsing="false" onAction="#message" prefHeight="52.0" prefWidth="122.0" text="Generate" />
-            <TextArea fx:id="outb" layoutX="676.0" layoutY="132.0" prefHeight="640.0" prefWidth="586.0" />
+            <TextArea fx:id="outb" layoutX="676.0" layoutY="132.0" prefHeight="640.0" prefWidth="586.0" wrapText="true" />
          </children>
     </AnchorPane>
   </children>
