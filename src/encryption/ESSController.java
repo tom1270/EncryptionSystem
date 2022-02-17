@@ -56,6 +56,7 @@ public class ESSController implements Initializable {
         return sb.toString();
     }
     
+    public int kst;
     public String password;
     public String pt;
     public int key;
@@ -100,6 +101,7 @@ public class ESSController implements Initializable {
        if(em.equals("Caesar Cipher") && os.equals("New Key")){
            String keys = inb.getText();
            key = Integer.parseInt(keys);
+           kst = key;
            outb.setText("Enter the amount you would like to shift your sentence by (between 1 and 25)");
        }else if(em.equals("Caesar Cipher") && os.equals("Get Key")){
            if (key < 1 || key > 25) {
@@ -112,7 +114,7 @@ public class ESSController implements Initializable {
         
         password = inb.getText();
         outb.setText("Your Password:\t" + password);
-        
+        System.out.print(key);
         String encryption = cipher(password, key);
         outb.appendText("\n**********************************************************************");
         outb.appendText("\nEncrypted Password:\t" + encryption);
@@ -120,15 +122,15 @@ public class ESSController implements Initializable {
         
        }else if(em.equals("Caesar Cipher") && os.equals("Decrypt A Message")){
            if(key < 1 || key > 25);
-        
+        kst = (kst*-1)+3;
         pt = inb.getText();
         outb.setText("Your Encrypted Password:\t" + pt);
         
-        String encryption = cipher(pt, key);
+        System.out.print(key);
+        String encryption = cipher(pt, -key);
         outb.appendText("\n**********************************************************************");
-        outb.appendText("\nDecrypted Password:\t" + cipher(encryption, key));
+        outb.appendText("\nDecrypted Password:\t" + encryption);
         outb.appendText("\n**********************************************************************"); 
-        System.out.print(cipher(encryption, key));
        }
        
     }
